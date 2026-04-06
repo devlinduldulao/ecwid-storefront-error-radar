@@ -8,9 +8,9 @@
   "supportEmail": "",
   "supportResponseWindow": "Reply within 2 business days",
   "supportTimezone": "UTC",
-  "supportUrl": "/public/support.html",
-  "privacyPolicyUrl": "/public/privacy.html",
-  "demoUrl": "/public/index.html",
+  "supportUrl": "/support.html",
+  "privacyPolicyUrl": "/privacy.html",
+  "demoUrl": "/",
   "legalEffectiveDate": "2026-04-06",
   "privacyContactBlurb": "Contact the support channel listed in the live marketplace listing for privacy requests.",
   "screenshots": [

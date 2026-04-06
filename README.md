@@ -40,7 +40,7 @@ Then open:
 - `http://localhost:4173/public/storefront-test.html?storeId=YOUR_STORE_ID`
 - `http://localhost:4173/public/index.html?storeId=YOUR_STORE_ID`
 
-The standalone page is for local iteration. In production, point your Ecwid app page URL at `public/index.html` on your static host.
+The standalone page is for local iteration. In source, the admin dashboard lives at `public/index.html`. In production, the build publishes that page at the site root so your Ecwid app page URL can be the clean base URL of your static host.
 
 Use the `Use Demo Preview` button when you want to simulate the dashboard with fake data, validate summary cards, or show the product without relying on a live Ecwid store response.
 
@@ -107,7 +107,7 @@ If you later decide you need cross-device history, merchant-wide settings sync, 
 
 ## Deployment
 
-Deploy the repo to any static host that can serve the repository root, then register the Ecwid app page URL to point to `public/index.html`.
+Deploy the repo to any static host that can serve the repository root, then register the Ecwid app page URL to point to the deployed site root.
 
 For App Market submission, also deploy the support and privacy pages:
 
@@ -118,9 +118,9 @@ This repository already includes a free GitHub Pages deployment workflow in `.gi
 
 The expected production URLs are:
 
-- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
-- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
-- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
+- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/`
+- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/privacy.html`
+- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/support.html`
 
 To enable it in GitHub:
 
@@ -128,7 +128,7 @@ To enable it in GitHub:
 2. Open **Settings > Pages**.
 3. Set **Source** to **GitHub Actions**.
 4. Let the `Deploy to GitHub Pages` workflow complete on the next push to `main`.
-5. Register `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html` as the Ecwid app page URL.
+5. Register `https://devlinduldulao.github.io/ecwid-storefront-error-radar/` as the Ecwid app page URL.
 
 Good fits:
 

@@ -29,6 +29,6 @@ Storefront Error Radar for Ecwid is a static, owner-only diagnostics dashboard f
 
 ## Hosted URLs
 
-- App page: `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
-- Privacy: `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
-- Support: `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
+- App page: `https://devlinduldulao.github.io/ecwid-storefront-error-radar/`
+- Privacy: `https://devlinduldulao.github.io/ecwid-storefront-error-radar/privacy.html`
+- Support: `https://devlinduldulao.github.io/ecwid-storefront-error-radar/support.html`

@@ -7,13 +7,13 @@ function loadProfile() {
   return JSON.parse(readProjectFile('config/publishing-profile.json'));
 }
 
-test('publishing profile points to the deployed GitHub Pages host and public pages', function () {
+test('publishing profile points to the deployed GitHub Pages host and clean root pages', function () {
   const profile = loadProfile();
 
   assert.equal(profile.hostBaseUrl, 'https://devlinduldulao.github.io/ecwid-storefront-error-radar');
-  assert.equal(profile.supportUrl, '/public/support.html');
-  assert.equal(profile.privacyPolicyUrl, '/public/privacy.html');
-  assert.equal(profile.demoUrl, '/public/index.html');
+  assert.equal(profile.supportUrl, '/support.html');
+  assert.equal(profile.privacyPolicyUrl, '/privacy.html');
+  assert.equal(profile.demoUrl, '/');
 });
 
 test('publishing profile references marketplace assets that exist in the repo', function () {

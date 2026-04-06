@@ -4,6 +4,34 @@ const path = require('path');
 const rootDir = path.join(__dirname, '..');
 const distDir = path.join(rootDir, 'dist');
 const copyTargets = ['public', 'src', 'assets'];
+const mirroredRootPages = [
+  {
+    source: 'public/index.html',
+    output: 'index.html',
+    replacements: [
+      ['./icon.svg', './public/icon.svg'],
+      ['./app.css', './public/app.css'],
+      ['../src/storefront/custom-storefront.css', './src/storefront/custom-storefront.css'],
+      ['../src/shared/diagnostics-core.js', './src/shared/diagnostics-core.js'],
+      ['../src/storefront/custom-storefront.js', './src/storefront/custom-storefront.js'],
+      ['../src/admin/app.js', './src/admin/app.js'],
+    ],
+  },
+  {
+    source: 'public/privacy.html',
+    output: 'privacy.html',
+    replacements: [
+      ['./app.css', './public/app.css'],
+    ],
+  },
+  {
+    source: 'public/support.html',
+    output: 'support.html',
+    replacements: [
+      ['./app.css', './public/app.css'],
+    ],
+  },
+];
 
 function resetDist() {
   fs.rmSync(distDir, { recursive: true, force: true });
@@ -20,6 +48,8 @@ function copyTree(relativePath) {
 function ensureExpectedFiles() {
   const requiredFiles = [
     'index.html',
+    'privacy.html',
+    'support.html',
     'public/index.html',
     'public/storefront-test.html',
     'public/app.css',
@@ -44,27 +74,21 @@ function ensureExpectedFiles() {
   });
 }
 
-function writeRootIndexRedirect() {
-  const html = [
-    '<!DOCTYPE html>',
-    '<html lang="en">',
-    '<head>',
-    '  <meta charset="UTF-8">',
-    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-    '  <title>Storefront Error Radar for Ecwid</title>',
-    '  <meta http-equiv="refresh" content="0; url=./public/index.html">',
-    '  <script>',
-    '    window.location.replace("./public/index.html" + window.location.search + window.location.hash);',
-    '  </script>',
-    '</head>',
-    '<body>',
-    '  <p>Redirecting to <a href="./public/index.html">Storefront Error Radar</a>.</p>',
-    '</body>',
-    '</html>',
-    ''
-  ].join('\n');
+function mirrorPublicPagesToRoot() {
+  mirroredRootPages.forEach(function (page) {
+    const sourcePath = path.join(rootDir, page.source);
+    const outputPath = path.join(distDir, page.output);
+    let content = fs.readFileSync(sourcePath, 'utf8');
 
-  fs.writeFileSync(path.join(distDir, 'index.html'), html);
+    page.replacements.forEach(function (replacement) {
+      const fromValue = replacement[0];
+      const toValue = replacement[1];
+
+      content = content.split(fromValue).join(toValue);
+    });
+
+    fs.writeFileSync(outputPath, content);
+  });
 }
 
 function writeBuildMeta() {
@@ -80,7 +104,7 @@ function writeBuildMeta() {
 resetDist();
 copyTargets.forEach(copyTree);
 copyTree('_headers');
-writeRootIndexRedirect();
+mirrorPublicPagesToRoot();
 ensureExpectedFiles();
 writeBuildMeta();
 

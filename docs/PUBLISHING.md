@@ -4,7 +4,7 @@ This repo ships a static Ecwid admin app. Publishing readiness is therefore abou
 
 ## Current publishing status
 
-- app page: ready at `public/index.html`
+- app page: ready at the deployed site root
 - standalone preview: ready at `public/storefront-test.html`
 - privacy page: ready at `public/privacy.html`
 - support page: scaffolded at `public/support.html`
@@ -19,15 +19,15 @@ This repo ships a static Ecwid admin app. Publishing readiness is therefore abou
 
 Before submission, deploy the static app over HTTPS and confirm these URLs work publicly:
 
-- app page URL: `/public/index.html`
-- privacy URL: `/public/privacy.html`
-- support URL: `/public/support.html`
+- app page URL: `/`
+- privacy URL: `/privacy.html`
+- support URL: `/support.html`
 
 For this repository's GitHub Pages setup, the expected hosted URLs are:
 
-- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
-- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
-- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
+- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/`
+- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/privacy.html`
+- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/support.html`
 
 The Ecwid app listing should point to real hosted pages, not local development URLs.
 
@@ -61,7 +61,7 @@ Use `assets/marketplace/README.md` to track the final artwork set. The repo now 
 4. Run `npm run publish:check`
 5. Run `npm run marketplace:screenshots` against the local app if the UI changed
 6. Deploy `dist/` or the repository root to your static host
-7. Verify `public/index.html`, `public/privacy.html`, and `public/support.html` over HTTPS
+7. Verify `/`, `/privacy.html`, and `/support.html` over HTTPS
 8. Confirm the GitHub-based support links and final exported artwork still match the live repo
 9. Register the hosted app page URL in Ecwid
 10. Submit the listing

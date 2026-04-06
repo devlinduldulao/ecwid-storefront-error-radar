@@ -4,7 +4,7 @@ This Ecwid app is deployed as static files.
 
 ## Required hosting model
 
-You need a host that can serve the repository root over HTTPS so Ecwid can load `public/index.html` inside the admin iframe.
+You need a host that can serve the repository root over HTTPS so Ecwid can load the published app page inside the admin iframe.
 
 Good options:
 
@@ -19,6 +19,9 @@ Deploy the repository root, not only the `public` folder, because the runtime HT
 
 Key production assets:
 
+- `index.html`
+- `privacy.html`
+- `support.html`
 - `public/index.html`
 - `public/app.css`
 - `public/privacy.html`
@@ -32,14 +35,14 @@ If you want a clean deployment directory, run `npm run build` and deploy `dist/`
 
 ## Ecwid app registration
 
-In the Ecwid Partner Portal or custom app configuration, set the app page URL to the deployed `public/index.html` path.
+In the Ecwid Partner Portal or custom app configuration, set the app page URL to the deployed site root or `index.html` path.
 
 For publishing, also host stable support and privacy URLs from the same deployment so the listing can reference real HTTPS pages.
 
 Example:
 
 ```text
-https://your-static-host.example.com/public/index.html
+https://your-static-host.example.com/
 ```
 
 There is no OAuth callback URL and no webhook URL in this version because there is no backend.
@@ -64,18 +67,17 @@ Recommended setup for this repository:
 5. Keep local asset links relative inside `public/` so the site works from the repository-scoped Pages URL.
 6. Verify these URLs return 200:
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/`
-	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
-	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
-	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
+	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/privacy.html`
+	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/support.html`
 7. Register the hosted app page URL in Ecwid and use the support/privacy URLs in the listing.
 
-The repository root now redirects to `public/index.html` so the default GitHub Pages URL does not return a 404.
+The build mirrors the publish-facing HTML pages into the deploy root so the default GitHub Pages URL serves the app directly instead of redirecting into `/public/`.
 
 ### Netlify or Cloudflare Pages
 
 - Build command: none required
 - Publish directory: repository root
-- Register `.../public/index.html` as the Ecwid app page URL.
+- Register `.../` as the Ecwid app page URL.
 
 ### Vercel
 

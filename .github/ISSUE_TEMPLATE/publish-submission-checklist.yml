@@ -17,9 +17,9 @@ body:
       options:
         - label: GitHub Pages is enabled for this repository
         - label: The Pages deployment workflow completed successfully on main
-        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html returns 200
-        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html returns 200
-        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html returns 200
+        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/ returns 200
+        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/privacy.html returns 200
+        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/support.html returns 200
 
   - type: checkboxes
     id: product
