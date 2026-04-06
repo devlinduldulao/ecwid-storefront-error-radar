@@ -1,0 +1,30 @@
+{
+  "name": "storefront-error-radar-ecwid",
+  "version": "1.1.0",
+  "description": "Static Ecwid owner dashboard for running storefront diagnostic preview sessions without a backend.",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "npx serve . -l 4173",
+    "marketplace:screenshots": "node scripts/capture-marketplace-screenshots.js",
+    "preview": "npx serve . -l 4173",
+    "lint": "node --check src/shared/diagnostics-core.js && node --check src/storefront/custom-storefront.js && node --check src/admin/app.js && node --check scripts/build.js && node --check scripts/capture-marketplace-screenshots.js && node --check scripts/smoke-test.js && node --check tests/helpers/browser-harness.js && node --check tests/*.test.js",
+    "test": "node --test tests/*.test.js && node scripts/smoke-test.js",
+    "publish:check": "node scripts/publish-check.js"
+  },
+  "keywords": [
+    "ecwid",
+    "lightspeed",
+    "storefront",
+    "diagnostics",
+    "static-app"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^29.0.0",
+    "playwright": "^1.59.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

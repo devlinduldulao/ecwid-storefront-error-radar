@@ -1,0 +1,36 @@
+.ser-preview-shell .ecwid-productBrowser {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.ser-preview-shell .ecwid-productBrowser .grid-product__wrap-inner,
+.ser-preview-shell .ecwid-productBrowser .product-details {
+  border-radius: 8px;
+}
+
+.ser-preview-shell .ecwid-productBrowser .grid-product__title-inner,
+.ser-preview-shell .ecwid-productBrowser .product-details__product-title {
+  color: #1B1C1D;
+  
+}
+
+.ser-preview-shell .ecwid-productBrowser .grid-product__price,
+.ser-preview-shell .ecwid-productBrowser .product-details__price {
+  color: #E81C24;
+  font-weight: 700;
+}
+
+.ser-preview-shell .ecwid-productBrowser .form-control__button,
+.ser-preview-shell .ecwid-productBrowser .ec-cart__button--checkout {
+  border-radius: 8px;
+}
+
+.ser-preview-shell .ecwid-productBrowser .form-control__button--add-to-bag,
+.ser-preview-shell .ecwid-productBrowser .ec-cart__button--checkout {
+  background: #1B1C1D;
+  border-color: transparent;
+}
+
+.ser-preview-shell .ecwid-productBrowser .form-control__button--add-to-bag:hover,
+.ser-preview-shell .ecwid-productBrowser .ec-cart__button--checkout:hover {
+  opacity: 0.92;
+}

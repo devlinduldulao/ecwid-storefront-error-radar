@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storefront Error Radar for Ecwid</title>
+  <link rel="stylesheet" href="/public/app.css">
+  <link rel="stylesheet" href="/src/storefront/custom-storefront.css">
+  <script src="https://djqizrxa6f10j.cloudfront.net/ecwid-sdk/js/1.2.9/ecwid-app.js"></script>
+</head>
+<body>
+  <main class="ser-app">
+    <section class="ser-hero">
+      <article class="ser-hero-card">
+        <img src="https://media.ffycdn.net/eu/lightspeed-hq/wterfpbNumAYyeQk9mhm.png?mod=v1/resize=1560" alt="Lightspeed" style="height: 28px; margin-bottom: 32px; display: block;">
+        <p class="ser-kicker">Ecwid owner workspace</p>
+        <h1 class="ser-title">Storefront Error Radar</h1>
+        <p class="ser-intro">Run storefront diagnostics inside the Ecwid dashboard without a Node server, database, or visitor tracking. The merchant opens this page, loads their own embedded storefront preview, and sees incidents only for that session.</p>
+        <div class="ser-chip-row">
+          <span class="ser-chip">No backend to operate</span>
+          <span class="ser-chip">No shopper monitoring</span>
+          <span class="ser-chip">Session-only incident capture</span>
+        </div>
+      </article>
+
+      <aside class="ser-hero-panel">
+        <div class="ser-hero-card ser-meta-stack">
+          <div class="ser-meta">
+            <span class="ser-meta-label">Store</span>
+            <div class="ser-meta-value" id="store-identity">Loading...</div>
+          </div>
+          <div class="ser-meta">
+            <span class="ser-meta-label">Runtime</span>
+            <div class="ser-meta-value" id="mode-value">Loading...</div>
+          </div>
+          <div class="ser-meta">
+            <span class="ser-meta-label">Storage</span>
+            <div class="ser-meta-value" id="storage-value">Loading...</div>
+          </div>
+          <div class="ser-meta">
+            <span class="ser-meta-label">Current Preview Page</span>
+            <div class="ser-meta-value" id="current-page-value">catalog</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="ser-layout">
+      <div class="ser-side">
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Session Controls</h2>
+              <p>These settings affect only the current owner browser for this store.</p>
+            </div>
+            <div class="ser-status" id="save-status"></div>
+          </div>
+
+          <form id="settings-form" class="ser-form">
+            <label class="ser-checkbox">
+              <input type="checkbox" id="capture-js" checked>
+              <span>
+                <strong>Capture JavaScript and asset failures</strong>
+                <br>
+                Record runtime exceptions, promise rejections, and broken scripts or styles in the preview session.
+              </span>
+            </label>
+
+            <label class="ser-checkbox">
+              <input type="checkbox" id="capture-network" checked>
+              <span>
+                <strong>Capture failing and slow requests</strong>
+                <br>
+                Watch fetch and XMLHttpRequest traffic created while the embedded storefront is loading.
+              </span>
+            </label>
+
+            <div class="ser-field">
+              <label for="max-events">Maximum session events</label>
+              <input class="ser-input" type="number" id="max-events" min="10" max="200" step="1" value="80">
+              <small>Keep the session lightweight. Older entries fall off once this limit is reached.</small>
+            </div>
+
+            <div class="ser-field">
+              <label for="slow-request-ms">Slow request threshold in milliseconds</label>
+              <input class="ser-input" type="number" id="slow-request-ms" min="300" max="10000" step="100" value="1500">
+              <small>Requests slower than this threshold are highlighted as performance drift.</small>
+            </div>
+
+            <div class="ser-actions">
+              <button class="ser-button ser-button-primary" type="submit">Save Session Settings</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="ser-card">
+          <h3>Owner-only mode</h3>
+          <p class="ser-help" id="session-note">This app does not watch live visitors. It only records issues while you use the embedded preview.</p>
+          <p class="ser-footnote">If you need shared history later, that is the point where a real backend becomes necessary. This version deliberately avoids that infrastructure bill.</p>
+        </section>
+      </div>
+
+      <div class="ser-main">
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Session Summary</h2>
+              <p>Signals collected while the owner tests the embedded storefront.</p>
+            </div>
+          </div>
+          <div class="ser-summary-grid">
+            <div class="ser-stat">
+              <span class="ser-stat-label">Recent Signals</span>
+              <strong id="summary-total-signals">0</strong>
+            </div>
+            <div class="ser-stat">
+              <span class="ser-stat-label">Critical Path Failures</span>
+              <strong id="summary-critical-signals">0</strong>
+            </div>
+            <div class="ser-stat">
+              <span class="ser-stat-label">Resource Failures</span>
+              <strong id="summary-resource-failures">0</strong>
+            </div>
+            <div class="ser-stat">
+              <span class="ser-stat-label">Slow Requests</span>
+              <strong id="summary-slow-requests">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Embedded Store Preview</h2>
+              <p>Use this sandbox to browse catalog, product, cart, and checkout transitions as the merchant.</p>
+            </div>
+            <div class="ser-button-row">
+              <button class="ser-button ser-button-secondary" type="button" id="fake-preview-toggle">Use Demo Preview</button>
+              <button class="ser-button ser-button-secondary" type="button" id="reload-preview">Reload Preview</button>
+              <button class="ser-button ser-button-secondary" type="button" id="export-session">Export JSON</button>
+              <button class="ser-button ser-button-danger" type="button" id="clear-session">Clear Session</button>
+            </div>
+          </div>
+          <div class="ser-status" id="preview-status"></div>
+          <div class="ser-preview-shell" id="preview-shell"></div>
+        </section>
+
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Incident Feed</h2>
+              <p>Sanitized event summaries from the current diagnostic run.</p>
+            </div>
+          </div>
+          <div class="ser-table-wrap">
+            <table class="ser-table">
+              <thead>
+                <tr>
+                  <th>When</th>
+                  <th>Signal</th>
+                  <th>Severity</th>
+                  <th>Page</th>
+                  <th>Summary</th>
+                </tr>
+              </thead>
+              <tbody id="incidents-body">
+                <tr>
+                  <td colspan="5" class="ser-empty">No incidents yet. Use the embedded preview to navigate products, cart, and checkout transitions.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="/src/shared/diagnostics-core.js"></script>
+  <script src="/src/storefront/custom-storefront.js"></script>
+  <script src="/src/admin/app.js"></script>
+</body>
+</html>

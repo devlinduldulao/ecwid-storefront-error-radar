@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Storefront Error Radar Icon</title>
+  <desc id="desc">A calm diagnostics icon with a radar pulse, a storefront frame, and a warning marker.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2f2c"/>
+      <stop offset="100%" stop-color="#123f59"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4d35e"/>
+      <stop offset="100%" stop-color="#ee6c4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <circle cx="256" cy="280" r="126" fill="none" stroke="#8ed1c2" stroke-width="18" opacity="0.22"/>
+  <circle cx="256" cy="280" r="84" fill="none" stroke="#8ed1c2" stroke-width="14" opacity="0.38"/>
+  <circle cx="256" cy="280" r="42" fill="none" stroke="#8ed1c2" stroke-width="12" opacity="0.7"/>
+  <path d="M256 280 334 216" fill="none" stroke="url(#glow)" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="344" cy="208" r="18" fill="#ee6c4d"/>
+  <path d="M146 145h220c17 0 30 13 30 30v130H116V175c0-17 13-30 30-30Z" fill="#f5f2ea"/>
+  <path d="M116 205h280" stroke="#d6d0c4" stroke-width="14"/>
+  <path d="M190 113h132v52H190Z" fill="#f5f2ea"/>
+  <path d="M226 374h60" stroke="#f5f2ea" stroke-width="18" stroke-linecap="round"/>
+  <path d="M180 418h152" stroke="#f5f2ea" stroke-width="18" stroke-linecap="round" opacity="0.85"/>
+  <path d="M155 205h42" stroke="#0f2f2c" stroke-width="18" stroke-linecap="round"/>
+  <path d="M219 205h42" stroke="#0f2f2c" stroke-width="18" stroke-linecap="round"/>
+</svg>

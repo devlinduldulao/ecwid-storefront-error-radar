@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storefront Error Radar for Ecwid — Privacy</title>
+  <link rel="stylesheet" href="/public/app.css">
+</head>
+<body>
+  <main class="ser-app ser-static-page">
+    <section class="ser-card">
+      <p class="ser-kicker">Privacy</p>
+      <h1 class="ser-title">Storefront Error Radar Privacy Notice</h1>
+      <p class="ser-intro">This Ecwid app is an owner-only diagnostics tool. It records runtime issues only while the merchant uses the embedded preview and keeps that data browser-local by default.</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>What this app stores</h2>
+      <p class="ser-help">The app stores browser-local settings such as capture preferences, demo-preview mode, the max event cap, and the slow-request threshold. Session incidents exist only in the current browser unless the merchant exports them manually.</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>What this app does not collect</h2>
+      <p class="ser-help">This version does not run for live shoppers, does not send telemetry to a backend controlled by this repo, and does not create a centralized customer event archive. It avoids databases, Redis, and webhook ingestion on purpose.</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>Exported files</h2>
+      <p class="ser-help">When a merchant clicks Export JSON, the file is generated in the browser and downloaded locally. Review exported files before sharing them outside your support process.</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>Support contact</h2>
+      <p class="ser-help">Support requests for this app are handled through the public issue tracker at <a href="https://github.com/devlinduldulao/ecwid-storefront-error-radar/issues">github.com/devlinduldulao/ecwid-storefront-error-radar/issues</a>. Do not include secrets in exported JSON files or support tickets.</p>
+    </section>
+  </main>
+</body>
+</html>

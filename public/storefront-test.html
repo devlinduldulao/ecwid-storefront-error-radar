@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storefront Error Radar Standalone Preview</title>
+  <link rel="stylesheet" href="/public/app.css">
+  <link rel="stylesheet" href="/src/storefront/custom-storefront.css">
+</head>
+<body>
+  <main class="ser-app">
+    <div class="ser-banner">
+      Standalone mode for local testing. Open this page as <strong>storefront-test.html?storeId=YOUR_STORE_ID</strong> to load your Ecwid preview without the admin iframe.
+    </div>
+
+    <section class="ser-hero">
+      <article class="ser-hero-card">
+        <p class="ser-kicker">Standalone diagnostics</p>
+        <h1 class="ser-title">Storefront Error Radar</h1>
+        <p class="ser-intro">This is the same owner-only diagnostics desk used inside Ecwid admin, but running outside the iframe for local iteration.</p>
+      </article>
+      <aside class="ser-hero-panel">
+        <div class="ser-hero-card ser-meta-stack">
+          <div class="ser-meta">
+            <span class="ser-meta-label">Store</span>
+            <div class="ser-meta-value" id="store-identity">Loading...</div>
+          </div>
+          <div class="ser-meta">
+            <span class="ser-meta-label">Runtime</span>
+            <div class="ser-meta-value" id="mode-value">Standalone preview</div>
+          </div>
+          <div class="ser-meta">
+            <span class="ser-meta-label">Storage</span>
+            <div class="ser-meta-value" id="storage-value">Browser local storage only</div>
+          </div>
+          <div class="ser-meta">
+            <span class="ser-meta-label">Current Preview Page</span>
+            <div class="ser-meta-value" id="current-page-value">catalog</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="ser-layout">
+      <div class="ser-side">
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Session Controls</h2>
+              <p>These settings affect only the current owner browser for this store.</p>
+            </div>
+            <div class="ser-status" id="save-status"></div>
+          </div>
+          <form id="settings-form" class="ser-form">
+            <label class="ser-checkbox">
+              <input type="checkbox" id="capture-js" checked>
+              <span>
+                <strong>Capture JavaScript and asset failures</strong>
+                <br>
+                Record runtime exceptions, promise rejections, and broken scripts or styles in the preview session.
+              </span>
+            </label>
+            <label class="ser-checkbox">
+              <input type="checkbox" id="capture-network" checked>
+              <span>
+                <strong>Capture failing and slow requests</strong>
+                <br>
+                Watch fetch and XMLHttpRequest traffic created while the embedded storefront is loading.
+              </span>
+            </label>
+            <div class="ser-field">
+              <label for="max-events">Maximum session events</label>
+              <input class="ser-input" type="number" id="max-events" min="10" max="200" step="1" value="80">
+            </div>
+            <div class="ser-field">
+              <label for="slow-request-ms">Slow request threshold in milliseconds</label>
+              <input class="ser-input" type="number" id="slow-request-ms" min="300" max="10000" step="100" value="1500">
+            </div>
+            <div class="ser-actions">
+              <button class="ser-button ser-button-primary" type="submit">Save Session Settings</button>
+            </div>
+          </form>
+        </section>
+        <section class="ser-card">
+          <h3>Owner-only mode</h3>
+          <p class="ser-help" id="session-note">This app does not watch live visitors. It only records issues while you use the embedded preview.</p>
+        </section>
+      </div>
+
+      <div class="ser-main">
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Session Summary</h2>
+              <p>Signals collected while the owner tests the embedded storefront.</p>
+            </div>
+          </div>
+          <div class="ser-summary-grid">
+            <div class="ser-stat">
+              <span class="ser-stat-label">Recent Signals</span>
+              <strong id="summary-total-signals">0</strong>
+            </div>
+            <div class="ser-stat">
+              <span class="ser-stat-label">Critical Path Failures</span>
+              <strong id="summary-critical-signals">0</strong>
+            </div>
+            <div class="ser-stat">
+              <span class="ser-stat-label">Resource Failures</span>
+              <strong id="summary-resource-failures">0</strong>
+            </div>
+            <div class="ser-stat">
+              <span class="ser-stat-label">Slow Requests</span>
+              <strong id="summary-slow-requests">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Embedded Store Preview</h2>
+              <p>Use this sandbox to browse catalog, product, cart, and checkout transitions as the merchant.</p>
+            </div>
+            <div class="ser-button-row">
+              <button class="ser-button ser-button-secondary" type="button" id="fake-preview-toggle">Use Demo Preview</button>
+              <button class="ser-button ser-button-secondary" type="button" id="reload-preview">Reload Preview</button>
+              <button class="ser-button ser-button-secondary" type="button" id="export-session">Export JSON</button>
+              <button class="ser-button ser-button-danger" type="button" id="clear-session">Clear Session</button>
+            </div>
+          </div>
+          <div class="ser-status" id="preview-status"></div>
+          <div class="ser-preview-shell" id="preview-shell"></div>
+        </section>
+
+        <section class="ser-card">
+          <div class="ser-card-heading">
+            <div>
+              <h2>Incident Feed</h2>
+              <p>Sanitized event summaries from the current diagnostic run.</p>
+            </div>
+          </div>
+          <div class="ser-table-wrap">
+            <table class="ser-table">
+              <thead>
+                <tr>
+                  <th>When</th>
+                  <th>Signal</th>
+                  <th>Severity</th>
+                  <th>Page</th>
+                  <th>Summary</th>
+                </tr>
+              </thead>
+              <tbody id="incidents-body">
+                <tr>
+                  <td colspan="5" class="ser-empty">No incidents yet. Open the page with a real store ID and use the preview.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="/src/shared/diagnostics-core.js"></script>
+  <script src="/src/storefront/custom-storefront.js"></script>
+  <script src="/src/admin/app.js"></script>
+</body>
+</html>

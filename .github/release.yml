@@ -1,0 +1,23 @@
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: Product Changes
+      labels:
+        - feat
+        - enhancement
+    - title: Fixes
+      labels:
+        - fix
+        - bug
+    - title: Documentation and Publishing
+      labels:
+        - docs
+        - publishing
+        - release
+    - title: Maintenance
+      labels:
+        - chore
+        - test
+        - ci

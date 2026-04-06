@@ -1,0 +1,62 @@
+name: Publish Submission Checklist
+description: Track the final GitHub Pages, Ecwid registration, and App Market submission steps.
+title: "publish: Ecwid App Market submission"
+labels:
+  - publishing
+  - release
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this issue before enabling the live Ecwid listing. Keep every checkbox aligned with the shipped static app behavior.
+
+  - type: checkboxes
+    id: hosting
+    attributes:
+      label: Hosting and Pages
+      options:
+        - label: GitHub Pages is enabled for this repository
+        - label: The Pages deployment workflow completed successfully on main
+        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html returns 200
+        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html returns 200
+        - label: https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html returns 200
+
+  - type: checkboxes
+    id: product
+    attributes:
+      label: Product validation
+      options:
+        - label: npm run build completed successfully
+        - label: npm run lint completed successfully
+        - label: npm test completed successfully
+        - label: npm run publish:check completed successfully
+        - label: The support page links point to the live GitHub repository and issue tracker
+        - label: The privacy page still matches the browser-local, owner-only product boundary
+
+  - type: checkboxes
+    id: listing
+    attributes:
+      label: Ecwid listing materials
+      options:
+        - label: Raster artwork from assets/marketplace/exported is ready for upload
+        - label: The icon and listing cover match the final product messaging
+        - label: The screenshot set reflects the current admin UI and demo preview mode
+        - label: The listing copy does not imply live shopper monitoring or centralized telemetry
+
+  - type: textarea
+    id: ecwid-registration
+    attributes:
+      label: Ecwid registration notes
+      description: Record the exact app page URL, support URL, privacy URL, and any App Market review notes.
+      placeholder: |
+        App page URL:
+        Support URL:
+        Privacy URL:
+        Review notes:
+
+  - type: textarea
+    id: release-summary
+    attributes:
+      label: Release summary
+      description: Capture the release note text or link to the GitHub release.
+      placeholder: Summarize the published version and any reviewer-facing notes.
