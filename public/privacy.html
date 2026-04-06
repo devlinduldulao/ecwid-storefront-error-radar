@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>Storefront Error Radar for Ecwid — Privacy</title>
   <link rel="stylesheet" href="./app.css">
 </head>
@@ -12,6 +13,12 @@
       <p class="ser-kicker">Privacy</p>
       <h1 class="ser-title">Storefront Error Radar Privacy Notice</h1>
       <p class="ser-intro">This Ecwid app is an owner-only diagnostics tool. It records runtime issues only while the merchant uses the embedded preview and keeps that data browser-local by default.</p>
+      <p class="ser-help"><strong>Effective date:</strong> April 6, 2026</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>Data controller</h2>
+      <p class="ser-help">The data controller for this app is the merchant who installs it. The app developer provides the tool but does not collect, process, or store any merchant or customer data on external servers. For privacy inquiries, contact the support channel listed in the marketplace listing or file an issue at <a href="https://github.com/devlinduldulao/ecwid-storefront-error-radar/issues">github.com/devlinduldulao/ecwid-storefront-error-radar/issues</a>.</p>
     </section>
 
     <section class="ser-card">
@@ -20,13 +27,35 @@
     </section>
 
     <section class="ser-card">
+      <h2>Legal basis for processing</h2>
+      <p class="ser-help">All data processing is based on the merchant's legitimate interest in diagnosing storefront errors in their own store. No shopper personal data is collected. The app operates exclusively within the merchant's browser session.</p>
+    </section>
+
+    <section class="ser-card">
       <h2>What this app does not collect</h2>
-      <p class="ser-help">This version does not run for live shoppers, does not send telemetry to a backend controlled by this repo, and does not create a centralized customer event archive. It avoids databases, Redis, and webhook ingestion on purpose.</p>
+      <p class="ser-help">This version does not run for live shoppers, does not send telemetry to a backend controlled by this repo, and does not create a centralized customer event archive. It avoids databases, Redis, and webhook ingestion on purpose. No personal data of store visitors is collected, processed, or stored.</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>Data retention</h2>
+      <p class="ser-help">Session diagnostic data exists only for the duration of the browser session and is discarded when the page is closed. Persisted settings in localStorage remain until the merchant clears browser data or uninstalls the app. Exported JSON files are stored locally on the merchant's device and managed entirely by the merchant.</p>
     </section>
 
     <section class="ser-card">
       <h2>Exported files</h2>
       <p class="ser-help">When a merchant clicks Export JSON, the file is generated in the browser and downloaded locally. Review exported files before sharing them outside your support process.</p>
+    </section>
+
+    <section class="ser-card">
+      <h2>Your rights</h2>
+      <p class="ser-help">Because all data is stored locally in your browser, you have full control over it at all times. You can:</p>
+      <ul class="ser-help">
+        <li><strong>Access:</strong> View all stored settings and session data directly in the app dashboard.</li>
+        <li><strong>Export:</strong> Download your session data as a JSON file at any time.</li>
+        <li><strong>Delete:</strong> Use the "Clear Session" button to remove session data, or clear your browser's localStorage to remove all app settings.</li>
+        <li><strong>Uninstall:</strong> Removing the app from your Ecwid control panel stops all functionality. Clearing browser data removes any remaining localStorage entries.</li>
+      </ul>
+      <p class="ser-help">If you believe your rights under GDPR or other data protection legislation have not been met, you may lodge a complaint with your local data protection supervisory authority.</p>
     </section>
 
     <section class="ser-card">

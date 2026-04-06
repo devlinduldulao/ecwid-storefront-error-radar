@@ -185,6 +185,22 @@
   }
 
   function readSettingsFromForm() {
+    var maxEventsRaw = Number(refs.maxEvents.value);
+    var slowRequestMsRaw = Number(refs.slowRequestMs.value);
+    var warnings = [];
+
+    if (!Number.isFinite(maxEventsRaw) || maxEventsRaw < 10 || maxEventsRaw > 200) {
+      warnings.push('Maximum session events must be a number between 10 and 200.');
+    }
+
+    if (!Number.isFinite(slowRequestMsRaw) || slowRequestMsRaw < 300 || slowRequestMsRaw > 10000) {
+      warnings.push('Slow request threshold must be a number between 300 and 10000.');
+    }
+
+    if (warnings.length) {
+      showSaveStatus(warnings.join(' '), 'error');
+    }
+
     return {
       captureJs: refs.captureJs.checked,
       captureNetwork: refs.captureNetwork.checked,
@@ -298,7 +314,7 @@
       '<button type="button" class="ser-button ser-button-primary" data-ser-demo-action="seed-session">Populate Full Demo Session</button>',
       '<button type="button" class="ser-button ser-button-secondary" data-ser-demo-action="recovery">Simulate Recovery</button>',
       '</div>',
-      '<p class="ser-demo-note">The fake session includes repeated JavaScript errors so the dashboard can also surface an error burst, just like the WooCommerce version.</p>',
+      '<p class="ser-demo-note">The fake session includes repeated JavaScript errors so the dashboard can also surface an error burst alert.</p>',
       '</section>',
       '</div>'
     ].join('');
