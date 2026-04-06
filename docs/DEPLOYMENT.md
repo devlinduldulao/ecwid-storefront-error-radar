@@ -63,10 +63,13 @@ Recommended setup for this repository:
 4. Let `.github/workflows/deploy-pages.yml` publish the `dist/` artifact.
 5. Keep local asset links relative inside `public/` so the site works from the repository-scoped Pages URL.
 6. Verify these URLs return 200:
+	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/`
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
 7. Register the hosted app page URL in Ecwid and use the support/privacy URLs in the listing.
+
+The repository root now redirects to `public/index.html` so the default GitHub Pages URL does not return a 404.
 
 ### Netlify or Cloudflare Pages
 

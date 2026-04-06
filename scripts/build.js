@@ -19,6 +19,7 @@ function copyTree(relativePath) {
 
 function ensureExpectedFiles() {
   const requiredFiles = [
+    'index.html',
     'public/index.html',
     'public/storefront-test.html',
     'public/app.css',
@@ -43,6 +44,29 @@ function ensureExpectedFiles() {
   });
 }
 
+function writeRootIndexRedirect() {
+  const html = [
+    '<!DOCTYPE html>',
+    '<html lang="en">',
+    '<head>',
+    '  <meta charset="UTF-8">',
+    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+    '  <title>Storefront Error Radar for Ecwid</title>',
+    '  <meta http-equiv="refresh" content="0; url=./public/index.html">',
+    '  <script>',
+    '    window.location.replace("./public/index.html" + window.location.search + window.location.hash);',
+    '  </script>',
+    '</head>',
+    '<body>',
+    '  <p>Redirecting to <a href="./public/index.html">Storefront Error Radar</a>.</p>',
+    '</body>',
+    '</html>',
+    ''
+  ].join('\n');
+
+  fs.writeFileSync(path.join(distDir, 'index.html'), html);
+}
+
 function writeBuildMeta() {
   const payload = {
     builtAt: new Date().toISOString(),
@@ -56,6 +80,7 @@ function writeBuildMeta() {
 resetDist();
 copyTargets.forEach(copyTree);
 copyTree('_headers');
+writeRootIndexRedirect();
 ensureExpectedFiles();
 writeBuildMeta();
 
