@@ -1,0 +1,36 @@
+{
+  "appName": "Storefront Error Radar for Ecwid",
+  "tagline": "Owner-only storefront diagnostics workspace for Ecwid merchants.",
+  "shortDescription": "Run embedded storefront diagnostic sessions, review captured incidents, and export browser-local JSON reports without a production database or long-running backend.",
+  "category": "Diagnostics / merchant tools / storefront QA",
+  "hostBaseUrl": "https://devlinduldulao.github.io/ecwid-storefront-error-radar",
+  "businessName": "Configured marketplace publisher",
+  "supportEmail": "",
+  "supportResponseWindow": "Reply within 2 business days",
+  "supportTimezone": "UTC",
+  "supportUrl": "/public/support.html",
+  "privacyPolicyUrl": "/public/privacy.html",
+  "demoUrl": "/public/index.html",
+  "legalEffectiveDate": "2026-04-06",
+  "privacyContactBlurb": "Contact the support channel listed in the live marketplace listing for privacy requests.",
+  "screenshots": [
+    "assets/marketplace/exported/screenshot-1-dashboard-1600x1000.png",
+    "assets/marketplace/exported/screenshot-2-demo-preview-1600x1000.png",
+    "assets/marketplace/exported/screenshot-3-settings-1600x1000.png"
+  ],
+  "assets": {
+    "iconSource": "assets/marketplace/icon.svg",
+    "iconPng": "assets/marketplace/exported/icon.png",
+    "icon512Png": "assets/marketplace/exported/icon-512.png",
+    "listingBannerSource": "assets/marketplace/listing-cover.svg",
+    "listingBannerPng": "assets/marketplace/exported/listing-cover-1600x900.png"
+  },
+  "technicalNotes": {
+    "hosting": "Static HTTPS hosting",
+    "backendRequired": false,
+    "databaseRequired": false,
+    "redisRequired": false,
+    "primarySurface": "Merchant dashboard with embedded storefront preview",
+    "storefrontBehavior": "Owner-only preview session that captures incidents only while the merchant is testing"
+  }
+}

@@ -4,6 +4,7 @@ const path = require('path');
 const rootDir = path.join(__dirname, '..');
 
 const requiredFiles = [
+  'config/publishing-profile.json',
   'public/index.html',
   'public/privacy.html',
   'public/support.html',
@@ -64,7 +65,12 @@ requiredPrivacySnippets.forEach(function (snippet) {
 
 assertIncludes('docs/PUBLISHING.md', 'support URL');
 assertIncludes('docs/PUBLISHING.md', 'privacy URL');
+assertIncludes('docs/PUBLISHING.md', 'publishing-profile.json');
 assertIncludes('docs/PUBLISHING.md', 'https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html');
+assertIncludes('config/publishing-profile.json', 'Storefront Error Radar for Ecwid');
+assertIncludes('config/publishing-profile.json', 'https://devlinduldulao.github.io/ecwid-storefront-error-radar');
+assertIncludes('config/publishing-profile.json', '/public/support.html');
+assertIncludes('config/publishing-profile.json', '/public/privacy.html');
 assertIncludes('assets/marketplace/README.md', 'icon');
 assertIncludes('assets/marketplace/README.md', 'listing banner or cover image');
 assertIncludes('assets/marketplace/README.md', 'exported');

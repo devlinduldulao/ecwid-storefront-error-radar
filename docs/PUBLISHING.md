@@ -8,6 +8,7 @@ This repo ships a static Ecwid admin app. Publishing readiness is therefore abou
 - standalone preview: ready at `public/storefront-test.html`
 - privacy page: ready at `public/privacy.html`
 - support page: scaffolded at `public/support.html`
+- publishing profile: ready at `config/publishing-profile.json`
 - automated CI: ready in `.github/workflows/ci.yml`
 - GitHub Pages deploy: ready in `.github/workflows/deploy-pages.yml`
 - release artifact packaging: ready in `.github/workflows/release-package.yml`
@@ -30,12 +31,15 @@ For this repository's GitHub Pages setup, the expected hosted URLs are:
 
 The Ecwid app listing should point to real hosted pages, not local development URLs.
 
+The repository-level publishing metadata is centralized in `config/publishing-profile.json`. Update that file first when app naming, hosted URLs, support contacts, or marketplace artwork paths change.
+
 ## Listing materials to finalize
 
 - app name and short description aligned with the owner-only positioning
 - exported app icon and listing artwork based on the SVG source set
 - exported screenshots or product images that show the actual merchant dashboard
 - support contact details on the public support page
+- support email or other final publisher contact details in `config/publishing-profile.json`
 - privacy copy reviewed against the shipped browser-local behavior
 - exported PNG assets from `assets/marketplace/exported/`
 
