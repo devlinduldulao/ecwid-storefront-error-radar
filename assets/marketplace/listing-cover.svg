@@ -1,45 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
   <title id="title">Storefront Error Radar Listing Cover</title>
-  <desc id="desc">Marketplace cover art for the owner-only Ecwid diagnostics app.</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b2239"/>
-      <stop offset="45%" stop-color="#0f3b4c"/>
-      <stop offset="100%" stop-color="#1f5c57"/>
-    </linearGradient>
-    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f7f1e5"/>
-      <stop offset="100%" stop-color="#ece6d8"/>
-    </linearGradient>
-  </defs>
-  <rect width="1600" height="900" fill="url(#bg)"/>
-  <circle cx="1320" cy="170" r="220" fill="#8ed1c2" opacity="0.1"/>
-  <circle cx="1290" cy="170" r="140" fill="#8ed1c2" opacity="0.08"/>
-  <circle cx="1260" cy="170" r="74" fill="#f4d35e" opacity="0.82"/>
-  <rect x="92" y="108" width="850" height="684" rx="34" fill="#12324a" opacity="0.85"/>
-  <rect x="122" y="138" width="790" height="624" rx="28" fill="url(#panel)"/>
-  <rect x="122" y="138" width="790" height="76" rx="28" fill="#dfe8ea"/>
-  <circle cx="174" cy="176" r="11" fill="#ee6c4d"/>
-  <circle cx="212" cy="176" r="11" fill="#f4d35e"/>
-  <circle cx="250" cy="176" r="11" fill="#4cb944"/>
-  <rect x="168" y="266" width="224" height="126" rx="22" fill="#f7faf7"/>
-  <rect x="406" y="266" width="224" height="126" rx="22" fill="#f7faf7"/>
-  <rect x="644" y="266" width="224" height="126" rx="22" fill="#f7faf7"/>
-  <rect x="168" y="428" width="700" height="288" rx="22" fill="#fffdf7"/>
-  <rect x="198" y="462" width="640" height="32" rx="16" fill="#dfe8ea"/>
-  <rect x="198" y="524" width="640" height="24" rx="12" fill="#e9ded1"/>
-  <rect x="198" y="574" width="640" height="24" rx="12" fill="#e9ded1"/>
-  <rect x="198" y="624" width="440" height="24" rx="12" fill="#e9ded1"/>
-  <path d="M1128 290c0-101 82-183 183-183s183 82 183 183" fill="none" stroke="#8ed1c2" stroke-width="18" opacity="0.35"/>
-  <path d="M1170 290c0-78 63-141 141-141s141 63 141 141" fill="none" stroke="#8ed1c2" stroke-width="18" opacity="0.55"/>
-  <path d="M1214 290c0-54 44-98 98-98s98 44 98 98" fill="none" stroke="#8ed1c2" stroke-width="18" opacity="0.8"/>
-  <path d="M1312 290l104-84" fill="none" stroke="#f4d35e" stroke-width="18" stroke-linecap="round"/>
-  <circle cx="1430" cy="194" r="24" fill="#ee6c4d"/>
-  <text x="1038" y="452" fill="#f7f1e5" font-family="Georgia, Times New Roman, serif" font-size="78" font-weight="700">Storefront Error Radar</text>
-  <text x="1042" y="522" fill="#d7e8df" font-family="Trebuchet MS, Verdana, sans-serif" font-size="32">Owner-only Ecwid diagnostics with live preview and fake-data demo mode.</text>
-  <text x="1042" y="588" fill="#d7e8df" font-family="Trebuchet MS, Verdana, sans-serif" font-size="30">No backend. No shopper surveillance. Browser-local sessions only.</text>
-  <rect x="1042" y="654" width="216" height="58" rx="29" fill="#f4d35e"/>
-  <rect x="1278" y="654" width="242" height="58" rx="29" fill="#214f54" stroke="#8ed1c2" stroke-width="2"/>
-  <text x="1088" y="692" fill="#0b2239" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">Demo Preview</text>
-  <text x="1324" y="692" fill="#eef8f1" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">JSON Export</text>
+  <desc id="desc">Flat, simple and sophisticated marketplace cover art for the Ecwid diagnostics app.</desc>
+  <rect width="1600" height="900" fill="#333333"/>
+  
+  <!-- Sleek Dashboard App Window -->
+  <rect x="120" y="140" width="800" height="620" rx="16" fill="#f8f8f8"/>
+  <rect x="120" y="140" width="800" height="60" rx="16" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <circle cx="150" cy="170" r="8" fill="#E02828"/>
+  <circle cx="174" cy="170" r="8" fill="#e0e0e0"/>
+  <circle cx="198" cy="170" r="8" fill="#e0e0e0"/>
+  
+  <!-- Dashboard Content Placeholders -->
+  <rect x="160" y="240" width="220" height="100" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="410" y="240" width="220" height="100" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="660" y="240" width="220" height="100" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="160" y="380" width="720" height="260" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="190" y="420" width="660" height="24" rx="4" fill="#f0f0f0"/>
+  <rect x="190" y="470" width="660" height="16" rx="4" fill="#f0f0f0"/>
+  <rect x="190" y="510" width="660" height="16" rx="4" fill="#f0f0f0"/>
+  <rect x="190" y="550" width="460" height="16" rx="4" fill="#f0f0f0"/>
+
+  <!-- Radar Icon Abstract Element -->
+  <circle cx="1300" cy="240" r="80" fill="none" stroke="#ffffff" stroke-width="12" opacity="0.1"/>
+  <circle cx="1300" cy="240" r="140" fill="none" stroke="#ffffff" stroke-width="12" opacity="0.05"/>
+  <circle cx="1300" cy="240" r="30" fill="none" stroke="#E02828" stroke-width="12"/>
+  <path d="M1270 240 h60 M1300 210 v60" stroke="#E02828" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Typography Element -->
+  <text x="1000" y="440" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="64" font-weight="700">Storefront Error Radar</text>
+  <text x="1000" y="520" fill="#a0a0a0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="32">Owner-only Ecwid diagnostics with</text>
+  <text x="1000" y="570" fill="#a0a0a0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="32">live preview and fake-data mode.</text>
+  
+  <!-- Call to action simple pill buttons -->
+  <rect x="1000" y="660" width="220" height="64" rx="32" fill="#E02828"/>
+  <text x="1110" y="702" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle">Demo Preview</text>
+
+  <rect x="1260" y="660" width="220" height="64" rx="32" fill="none" stroke="#ffffff" stroke-width="4"/>
+  <text x="1370" y="702" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle">JSON Export</text>
 </svg>
