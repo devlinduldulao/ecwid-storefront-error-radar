@@ -114,11 +114,21 @@ For App Market submission, also deploy the support and privacy pages:
 - `public/privacy.html`
 - `public/support.html`
 
-If you use the existing GitHub Pages workflow for this repository, the expected production URLs are:
+This repository already includes a free GitHub Pages deployment workflow in `.github/workflows/deploy-pages.yml`. Every push to `main` builds `dist/` and publishes it through GitHub Actions.
+
+The expected production URLs are:
 
 - `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
 - `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
 - `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
+
+To enable it in GitHub:
+
+1. Push this repository to GitHub.
+2. Open **Settings > Pages**.
+3. Set **Source** to **GitHub Actions**.
+4. Let the `Deploy to GitHub Pages` workflow complete on the next push to `main`.
+5. Register `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html` as the Ecwid app page URL.
 
 Good fits:
 

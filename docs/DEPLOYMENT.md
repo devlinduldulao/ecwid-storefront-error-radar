@@ -48,11 +48,12 @@ There is no OAuth callback URL and no webhook URL in this version because there 
 
 ### GitHub Pages
 
-- Publish from the repository root.
-- Use the generated Pages URL.
-- Register `.../public/index.html` as the Ecwid app page URL.
+This repository already includes the recommended free deployment workflow at `.github/workflows/deploy-pages.yml`.
 
-Or publish `dist/` from a workflow if you prefer build artifacts over source deployment.
+- GitHub Actions runs on every push to `main`.
+- The workflow installs dependencies with `npm ci`.
+- It builds the static artifact with `npm run build`.
+- It publishes `dist/` to GitHub Pages.
 
 Recommended setup for this repository:
 
@@ -60,11 +61,12 @@ Recommended setup for this repository:
 2. Open the repository settings and enable GitHub Pages.
 3. Set the source to GitHub Actions.
 4. Let `.github/workflows/deploy-pages.yml` publish the `dist/` artifact.
-5. Verify these URLs return 200:
+5. Keep local asset links relative inside `public/` so the site works from the repository-scoped Pages URL.
+6. Verify these URLs return 200:
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/index.html`
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/privacy.html`
 	- `https://devlinduldulao.github.io/ecwid-storefront-error-radar/public/support.html`
-6. Register the hosted app page URL in Ecwid and use the support/privacy URLs in the listing.
+7. Register the hosted app page URL in Ecwid and use the support/privacy URLs in the listing.
 
 ### Netlify or Cloudflare Pages
 
