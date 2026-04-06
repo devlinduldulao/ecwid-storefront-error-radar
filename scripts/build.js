@@ -33,6 +33,14 @@ const mirroredRootPages = [
   },
 ];
 
+const redirectPages = [
+  {
+    output: 'public/index.html',
+    target: '../',
+    title: 'Redirecting to Storefront Error Radar',
+  },
+];
+
 function resetDist() {
   fs.rmSync(distDir, { recursive: true, force: true });
   fs.mkdirSync(distDir, { recursive: true });
@@ -91,6 +99,36 @@ function mirrorPublicPagesToRoot() {
   });
 }
 
+function writeRedirectPages() {
+  redirectPages.forEach(function (page) {
+    const outputPath = path.join(distDir, page.output);
+    const content = [
+      '<!DOCTYPE html>',
+      '<html lang="en">',
+      '<head>',
+      '  <meta charset="UTF-8">',
+      '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+      '  <title>' + page.title + '</title>',
+      '  <link rel="canonical" href="' + page.target + '">',
+      '  <meta http-equiv="refresh" content="0; url=' + page.target + '">',
+      '  <script>',
+      '    (function () {',
+      '      var nextUrl = ' + JSON.stringify(page.target) + ' + (window.location.search || "") + (window.location.hash || "");',
+      '      window.location.replace(nextUrl);',
+      '    }());',
+      '  </script>',
+      '</head>',
+      '<body>',
+      '  <p>Redirecting to the published app entry point. <a href="' + page.target + '">Continue</a>.</p>',
+      '</body>',
+      '</html>',
+      '',
+    ].join('\n');
+
+    fs.writeFileSync(outputPath, content);
+  });
+}
+
 function writeBuildMeta() {
   const payload = {
     builtAt: new Date().toISOString(),
@@ -105,6 +143,7 @@ resetDist();
 copyTargets.forEach(copyTree);
 copyTree('_headers');
 mirrorPublicPagesToRoot();
+writeRedirectPages();
 ensureExpectedFiles();
 writeBuildMeta();
 
