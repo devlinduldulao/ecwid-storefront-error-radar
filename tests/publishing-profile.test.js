@@ -22,6 +22,6 @@ test('publishing profile references marketplace assets that exist in the repo', 
   assert.equal(profile.assets.iconSource, 'assets/marketplace/icon.svg');
   assert.equal(profile.assets.iconPng, 'assets/marketplace/exported/icon.png');
   assert.equal(profile.assets.listingBannerSource, 'assets/marketplace/listing-cover.svg');
-  assert.equal(profile.assets.listingBannerPng, 'assets/marketplace/exported/listing-cover-1600x900.png');
+  assert.equal(profile.assets.listingBannerPng, 'assets/marketplace/exported/listing-cover-1024x538.png');
   assert.equal(profile.screenshots.length, 3);
 });

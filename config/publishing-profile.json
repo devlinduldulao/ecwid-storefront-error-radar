@@ -4,8 +4,8 @@
   "shortDescription": "Run embedded storefront diagnostic sessions, review captured incidents, and export browser-local JSON reports without a production database or long-running backend.",
   "category": "Diagnostics / merchant tools / storefront QA",
   "hostBaseUrl": "https://devlinduldulao.github.io/ecwid-storefront-error-radar",
-  "businessName": "Configured marketplace publisher",
-  "supportEmail": "",
+  "businessName": "devlinduldulao",
+  "supportEmail": "devlinduldulao@gmail.com",
   "supportResponseWindow": "Reply within 2 business days",
   "supportTimezone": "UTC",
   "supportUrl": "/support.html",
@@ -23,7 +23,8 @@
     "iconPng": "assets/marketplace/exported/icon.png",
     "icon512Png": "assets/marketplace/exported/icon-512.png",
     "listingBannerSource": "assets/marketplace/listing-cover.svg",
-    "listingBannerPng": "assets/marketplace/exported/listing-cover-1600x900.png"
+    "listingBannerPng": "assets/marketplace/exported/listing-cover-1024x538.png",
+    "listingBannerPngLarge": "assets/marketplace/exported/listing-cover-1600x900.png"
   },
   "technicalNotes": {
     "hosting": "Static HTTPS hosting",
