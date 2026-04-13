@@ -537,3 +537,278 @@ a {
     align-items: stretch;
   }
 }
+
+/* ─── Mode Banner ─── */
+.ser-mode-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 12px 18px;
+  border-radius: var(--ser-radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ser-mode-banner-neutral {
+  background: var(--ser-info-soft);
+  color: var(--ser-muted);
+  border: 1px solid var(--ser-line);
+}
+
+.ser-mode-banner-live {
+  background: rgba(15, 118, 110, 0.1);
+  color: #0f5f59;
+  border: 1px solid rgba(15, 118, 110, 0.25);
+}
+
+.ser-mode-banner-demo {
+  background: rgba(180, 83, 9, 0.1);
+  color: #8f4a0d;
+  border: 1px solid rgba(180, 83, 9, 0.25);
+}
+
+.ser-mode-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ser-mode-banner-neutral .ser-mode-dot {
+  background: var(--ser-muted);
+}
+
+.ser-mode-banner-live .ser-mode-dot {
+  background: #0f766e;
+  box-shadow: 0 0 6px rgba(15, 118, 110, 0.45);
+  animation: ser-pulse 2s ease-in-out infinite;
+}
+
+.ser-mode-banner-demo .ser-mode-dot {
+  background: #b45309;
+}
+
+@keyframes ser-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.ser-button-link {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: auto;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ser-button-link:hover {
+  opacity: 0.7;
+}
+
+/* ─── Data Source Badge ─── */
+.ser-data-badge {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-left: 8px;
+}
+
+.ser-data-badge-live {
+  background: rgba(15, 118, 110, 0.14);
+  color: #0f5f59;
+}
+
+.ser-data-badge-demo {
+  background: rgba(180, 83, 9, 0.14);
+  color: #8f4a0d;
+}
+
+/* ─── Onboarding Guide ─── */
+.ser-onboarding {
+  margin-bottom: 18px;
+}
+
+.ser-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.ser-step {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--ser-radius);
+  border: 1px solid var(--ser-line);
+  background: var(--ser-surface);
+}
+
+.ser-step-number {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ser-ink);
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.ser-step strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.ser-step p {
+  margin: 0;
+  color: var(--ser-muted);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.ser-onboarding-tips {
+  padding: 14px 18px;
+  border-radius: var(--ser-radius);
+  background: var(--ser-info-soft);
+  display: grid;
+  gap: 4px;
+}
+
+.ser-onboarding-tips p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ser-muted);
+  line-height: 1.5;
+}
+
+.ser-button-sm {
+  padding: 7px 12px;
+  font-size: 0.84rem;
+}
+
+/* ─── Session History ─── */
+#session-history-card {
+  margin-bottom: 18px;
+}
+
+.ser-history-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ser-history-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border-radius: var(--ser-radius);
+  border: 1px solid var(--ser-line);
+  background: var(--ser-surface);
+}
+
+.ser-history-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.ser-history-date {
+  font-weight: 700;
+}
+
+.ser-history-mode {
+  display: inline-flex;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ser-history-mode-live {
+  background: rgba(15, 118, 110, 0.14);
+  color: #0f5f59;
+}
+
+.ser-history-mode-demo {
+  background: rgba(180, 83, 9, 0.14);
+  color: #8f4a0d;
+}
+
+.ser-history-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 6px;
+  font-size: 0.84rem;
+  color: var(--ser-muted);
+}
+
+.ser-history-stats strong {
+  color: var(--ser-ink);
+}
+
+.ser-history-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ─── Empty State ─── */
+.ser-empty-state {
+  text-align: center;
+  padding: 28px 18px;
+  color: var(--ser-muted);
+}
+
+.ser-empty-state-icon {
+  font-size: 2rem;
+  margin: 0 0 6px;
+}
+
+.ser-empty-state p {
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.ser-empty-state strong {
+  color: var(--ser-ink);
+}
+
+@media (max-width: 1100px) {
+  .ser-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .ser-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .ser-history-entry {
+    grid-template-columns: 1fr;
+  }
+}

@@ -30,7 +30,20 @@
     fakePreviewToggle: document.getElementById('fake-preview-toggle'),
     reloadPreview: document.getElementById('reload-preview'),
     clearSession: document.getElementById('clear-session'),
-    exportSession: document.getElementById('export-session')
+    exportSession: document.getElementById('export-session'),
+    modeBanner: document.getElementById('mode-banner'),
+    modeDot: document.getElementById('mode-dot'),
+    modeBannerText: document.getElementById('mode-banner-text'),
+    showOnboardingBtn: document.getElementById('show-onboarding-btn'),
+    onboardingGuide: document.getElementById('onboarding-guide'),
+    dismissOnboarding: document.getElementById('dismiss-onboarding'),
+    sessionHistoryCard: document.getElementById('session-history-card'),
+    historyList: document.getElementById('history-list'),
+    historyEmpty: document.getElementById('history-empty'),
+    toggleHistory: document.getElementById('toggle-history'),
+    clearHistory: document.getElementById('clear-history'),
+    saveToHistory: document.getElementById('save-to-history'),
+    dataSourceBadge: document.getElementById('data-source-badge')
   };
 
   var state = {
@@ -48,6 +61,7 @@
 
   function init() {
     bindUi();
+    initOnboarding();
     getEcwidContext().then(function (context) {
       state.context = context;
       state.settings = loadSettings(context.storeId);
@@ -60,6 +74,8 @@
         storeId: context.storeId
       });
       mountPreview();
+      renderHistory();
+      updateModeBanner();
       showSaveStatus('Settings are stored in this browser for store ' + context.storeId + '.', 'info');
     }).catch(function (error) {
       showSaveStatus(error.message, 'error');
@@ -97,6 +113,39 @@
     refs.exportSession.addEventListener('click', function () {
       exportSnapshot();
     });
+
+    if (refs.saveToHistory) {
+      refs.saveToHistory.addEventListener('click', function () {
+        var saved = saveCurrentToHistory();
+        if (saved) {
+          showPreviewStatus('Session saved to history. You can view it anytime from Past Diagnostic Runs.', 'success');
+        }
+      });
+    }
+
+    if (refs.dismissOnboarding) {
+      refs.dismissOnboarding.addEventListener('click', function () {
+        hideOnboarding();
+      });
+    }
+
+    if (refs.showOnboardingBtn) {
+      refs.showOnboardingBtn.addEventListener('click', function () {
+        showOnboarding();
+      });
+    }
+
+    if (refs.clearHistory) {
+      refs.clearHistory.addEventListener('click', function () {
+        clearSessionHistory();
+      });
+    }
+
+    if (refs.toggleHistory) {
+      refs.toggleHistory.addEventListener('click', function () {
+        toggleHistoryVisibility();
+      });
+    }
   }
 
   function getEcwidContext() {
@@ -173,6 +222,7 @@
     refs.currentPageValue.textContent = 'catalog';
     refs.sessionNote.textContent = 'This app does not watch live visitors. It only records issues while you use the embedded preview. You can switch to a built-in demo preview when you want to simulate the dashboard with fake data.';
     updateDemoToggle();
+    updateModeBanner();
     scheduleResize();
   }
 
@@ -236,6 +286,7 @@
 
     saveSettings(state.context ? state.context.storeId : 'preview', state.settings);
     updateDemoToggle();
+    updateModeBanner();
     session.clear();
     mountPreview();
     showSaveStatus(
@@ -490,9 +541,10 @@
     refs.resourceFailures.textContent = String(snapshot.summary.resourceFailures);
     refs.slowRequests.textContent = String(snapshot.summary.slowRequests);
     refs.currentPageValue.textContent = snapshot.context.pageType || 'catalog';
+    updateModeBanner();
 
     if (!snapshot.events.length) {
-      refs.incidentsBody.innerHTML = '<tr><td colspan="5" class="ser-empty">No incidents yet. Use the embedded preview to navigate products, cart, and checkout transitions.</td></tr>';
+      refs.incidentsBody.innerHTML = '<tr><td colspan="5" class="ser-empty">No incidents yet. Browse your store in the Embedded Store Preview above \u2014 errors and slow requests will appear here automatically.</td></tr>';
       scheduleResize();
       return;
     }
@@ -548,6 +600,242 @@
     resizeTimer = global.setTimeout(function () {
       global.EcwidApp.setSize({ height: document.body.scrollHeight + 24 });
     }, 100);
+  }
+
+  /* ─── Mode Banner ─── */
+  function updateModeBanner() {
+    if (!refs.modeBanner) {
+      return;
+    }
+
+    var isDemo = Boolean(state.settings && state.settings.demoPreviewEnabled);
+    var hasEvents = session.getSnapshot().events.length > 0;
+
+    refs.modeBanner.className = 'ser-mode-banner';
+
+    if (isDemo) {
+      refs.modeBanner.classList.add('ser-mode-banner-demo');
+      refs.modeBannerText.textContent = 'DEMO MODE \u2014 Viewing simulated data. Switch to Live Preview for real store diagnostics.';
+    } else if (hasEvents) {
+      refs.modeBanner.classList.add('ser-mode-banner-live');
+      refs.modeBannerText.textContent = 'LIVE DIAGNOSTICS \u2014 Collecting real data from your embedded store preview.';
+    } else {
+      refs.modeBanner.classList.add('ser-mode-banner-neutral');
+      refs.modeBannerText.textContent = 'No diagnostic data yet. Browse your store in the preview below to start collecting.';
+    }
+
+    updateDataSourceBadge(isDemo);
+    scheduleResize();
+  }
+
+  function updateDataSourceBadge(isDemo) {
+    if (!refs.dataSourceBadge) {
+      return;
+    }
+
+    refs.dataSourceBadge.textContent = isDemo ? 'DEMO' : 'LIVE';
+    refs.dataSourceBadge.className = 'ser-data-badge ' + (isDemo ? 'ser-data-badge-demo' : 'ser-data-badge-live');
+  }
+
+  /* ─── Onboarding ─── */
+  function getOnboardingKey() {
+    return 'storefront-error-radar:onboarding-dismissed';
+  }
+
+  function initOnboarding() {
+    if (!refs.onboardingGuide) {
+      return;
+    }
+
+    var dismissed = false;
+
+    try {
+      dismissed = global.localStorage.getItem(getOnboardingKey()) === 'true';
+    } catch (error) {
+      dismissed = false;
+    }
+
+    refs.onboardingGuide.style.display = dismissed ? 'none' : '';
+  }
+
+  function showOnboarding() {
+    if (!refs.onboardingGuide) {
+      return;
+    }
+
+    refs.onboardingGuide.style.display = '';
+
+    try {
+      global.localStorage.removeItem(getOnboardingKey());
+    } catch (error) {
+      /* localStorage may be unavailable */
+    }
+
+    scheduleResize();
+  }
+
+  function hideOnboarding() {
+    if (!refs.onboardingGuide) {
+      return;
+    }
+
+    refs.onboardingGuide.style.display = 'none';
+
+    try {
+      global.localStorage.setItem(getOnboardingKey(), 'true');
+    } catch (error) {
+      /* localStorage may be unavailable */
+    }
+
+    scheduleResize();
+  }
+
+  /* ─── Session History ─── */
+  function getHistoryKey() {
+    var storeId = state.context ? state.context.storeId : 'unknown';
+    return 'storefront-error-radar:ecwid:' + storeId + ':history';
+  }
+
+  function loadSessionHistory() {
+    try {
+      var raw = global.localStorage.getItem(getHistoryKey());
+      return raw ? JSON.parse(raw) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function persistSessionHistory(entries) {
+    try {
+      global.localStorage.setItem(getHistoryKey(), JSON.stringify(entries));
+    } catch (error) {
+      /* localStorage may be unavailable */
+    }
+  }
+
+  function saveCurrentToHistory() {
+    var snapshot = session.getSnapshot();
+
+    if (!snapshot.events.length) {
+      showPreviewStatus('No diagnostic data to save. Browse the store preview first.', 'info');
+      return false;
+    }
+
+    var isDemo = Boolean(state.settings && state.settings.demoPreviewEnabled);
+    var topIssues = snapshot.events.slice(0, 3).map(function (event) {
+      return { type: event.type, message: event.message, severity: event.severity };
+    });
+
+    var history = loadSessionHistory();
+
+    var entry = {
+      id: Date.now() * 100 + (history.length % 100),
+      timestamp: new Date().toISOString(),
+      storeId: snapshot.context.storeId || 'unknown',
+      mode: isDemo ? 'demo' : 'live',
+      summary: {
+        recentSignals: snapshot.summary.recentSignals,
+        criticalPathFailures: snapshot.summary.criticalPathFailures,
+        resourceFailures: snapshot.summary.resourceFailures,
+        slowRequests: snapshot.summary.slowRequests
+      },
+      eventCount: snapshot.events.length,
+      topIssues: topIssues
+    };
+
+    history.unshift(entry);
+
+    if (history.length > 20) {
+      history = history.slice(0, 20);
+    }
+
+    persistSessionHistory(history);
+    renderHistory();
+    return true;
+  }
+
+  function clearSessionHistory() {
+    persistSessionHistory([]);
+    renderHistory();
+    showPreviewStatus('Session history cleared.', 'info');
+  }
+
+  function deleteHistoryEntry(entryId) {
+    var history = loadSessionHistory().filter(function (entry) {
+      return entry.id !== entryId;
+    });
+
+    persistSessionHistory(history);
+    renderHistory();
+  }
+
+  function toggleHistoryVisibility() {
+    if (!refs.historyList || !refs.toggleHistory) {
+      return;
+    }
+
+    var isHidden = refs.historyList.style.display === 'none';
+    refs.historyList.style.display = isHidden ? '' : 'none';
+    refs.toggleHistory.textContent = isHidden ? 'Hide' : 'Show';
+    scheduleResize();
+  }
+
+  function renderHistory() {
+    if (!refs.historyList) {
+      return;
+    }
+
+    var history = loadSessionHistory();
+
+    if (!history.length) {
+      refs.historyList.innerHTML = [
+        '<div class="ser-empty-state" id="history-empty">',
+        '<p class="ser-empty-state-icon">\uD83D\uDCCB</p>',
+        '<p><strong>No saved sessions yet</strong></p>',
+        '<p>Run a diagnostic scan using the preview below, then click <em>Save to History</em> to keep a record here.</p>',
+        '</div>'
+      ].join('');
+      scheduleResize();
+      return;
+    }
+
+    refs.historyList.innerHTML = history.map(function (entry) {
+      var date = new Date(entry.timestamp);
+      var dateStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+      var timeStr = date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      var modeClass = entry.mode === 'demo' ? 'ser-history-mode-demo' : 'ser-history-mode-live';
+      var modeLabel = entry.mode === 'demo' ? 'DEMO' : 'LIVE';
+
+      return [
+        '<div class="ser-history-entry">',
+        '<div>',
+        '<div class="ser-history-meta">',
+        '<span class="ser-history-date">' + escapeHtml(dateStr) + ' at ' + escapeHtml(timeStr) + '</span>',
+        '<span class="ser-history-mode ' + modeClass + '">' + modeLabel + '</span>',
+        '<span>Store ' + escapeHtml(entry.storeId) + '</span>',
+        '</div>',
+        '<div class="ser-history-stats">',
+        '<span>Signals: <strong>' + entry.summary.recentSignals + '</strong></span>',
+        '<span>Critical: <strong>' + entry.summary.criticalPathFailures + '</strong></span>',
+        '<span>Resource Failures: <strong>' + entry.summary.resourceFailures + '</strong></span>',
+        '<span>Slow: <strong>' + entry.summary.slowRequests + '</strong></span>',
+        '</div>',
+        '</div>',
+        '<div class="ser-history-actions">',
+        '<button class="ser-button ser-button-danger ser-button-sm" type="button" data-ser-delete-history="' + entry.id + '">Remove</button>',
+        '</div>',
+        '</div>'
+      ].join('');
+    }).join('');
+
+    refs.historyList.onclick = function (event) {
+      var deleteBtn = event.target.closest('[data-ser-delete-history]');
+      if (deleteBtn) {
+        deleteHistoryEntry(Number(deleteBtn.getAttribute('data-ser-delete-history')));
+      }
+    };
+
+    scheduleResize();
   }
 
   function escapeHtml(value) {

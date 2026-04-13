@@ -48,6 +48,69 @@
       </aside>
     </section>
 
+    <div class="ser-mode-banner ser-mode-banner-neutral" id="mode-banner">
+      <span class="ser-mode-dot" id="mode-dot"></span>
+      <span id="mode-banner-text">Initializing diagnostics&hellip;</span>
+      <button class="ser-button-link" id="show-onboarding-btn" type="button">How to use this app</button>
+    </div>
+
+    <section class="ser-card ser-onboarding" id="onboarding-guide">
+      <div class="ser-card-heading">
+        <div>
+          <h2>Getting Started</h2>
+          <p>Three steps to your first storefront diagnostic — no server or database required.</p>
+        </div>
+        <button class="ser-button ser-button-secondary ser-button-sm" id="dismiss-onboarding" type="button">Dismiss</button>
+      </div>
+      <div class="ser-steps">
+        <div class="ser-step">
+          <div class="ser-step-number">1</div>
+          <div>
+            <strong>Open the Dashboard</strong>
+            <p>You are here. This page is your diagnostic command center inside the Ecwid admin panel.</p>
+          </div>
+        </div>
+        <div class="ser-step">
+          <div class="ser-step-number">2</div>
+          <div>
+            <strong>Browse Your Store Preview</strong>
+            <p>Scroll to <em>Embedded Store Preview</em> below and navigate through products, cart, and checkout. Errors and slow requests are captured automatically as you browse.</p>
+          </div>
+        </div>
+        <div class="ser-step">
+          <div class="ser-step-number">3</div>
+          <div>
+            <strong>Review &amp; Save Results</strong>
+            <p>Check the <em>Session Summary</em> for the overview and the <em>Incident Feed</em> for details. Click <strong>Save to History</strong> to keep a record in this browser for later reference.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ser-onboarding-tips">
+        <p><strong>Tip:</strong> Use <em>Demo Preview</em> to explore the dashboard with simulated data before running a real scan.</p>
+        <p><strong>Privacy:</strong> This app runs entirely in your browser. No data leaves your device and no live shoppers are monitored.</p>
+      </div>
+    </section>
+
+    <section class="ser-card" id="session-history-card">
+      <div class="ser-card-heading">
+        <div>
+          <h2>Past Diagnostic Runs</h2>
+          <p>Saved sessions from previous scans — stored in this browser only.</p>
+        </div>
+        <div class="ser-button-row">
+          <button class="ser-button ser-button-secondary ser-button-sm" type="button" id="toggle-history">Hide</button>
+          <button class="ser-button ser-button-danger ser-button-sm" type="button" id="clear-history">Clear History</button>
+        </div>
+      </div>
+      <div id="history-list" class="ser-history-list">
+        <div class="ser-empty-state" id="history-empty">
+          <p class="ser-empty-state-icon">📋</p>
+          <p><strong>No saved sessions yet</strong></p>
+          <p>Run a diagnostic scan using the preview below, then click <em>Save to History</em> to keep a record here.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="ser-layout">
       <div class="ser-side">
         <section class="ser-card">
@@ -107,7 +170,7 @@
         <section class="ser-card">
           <div class="ser-card-heading">
             <div>
-              <h2>Session Summary</h2>
+              <h2>Session Summary <span class="ser-data-badge" id="data-source-badge">LIVE</span></h2>
               <p>Signals collected while the owner tests the embedded storefront.</p>
             </div>
           </div>
@@ -140,6 +203,7 @@
             <div class="ser-button-row">
               <button class="ser-button ser-button-secondary" type="button" id="fake-preview-toggle">Use Demo Preview</button>
               <button class="ser-button ser-button-secondary" type="button" id="reload-preview">Reload Preview</button>
+              <button class="ser-button ser-button-primary" type="button" id="save-to-history">Save to History</button>
               <button class="ser-button ser-button-secondary" type="button" id="export-session">Export JSON</button>
               <button class="ser-button ser-button-danger" type="button" id="clear-session">Clear Session</button>
             </div>
@@ -168,7 +232,7 @@
               </thead>
               <tbody id="incidents-body">
                 <tr>
-                  <td colspan="5" class="ser-empty">No incidents yet. Use the embedded preview to navigate products, cart, and checkout transitions.</td>
+                  <td colspan="5" class="ser-empty">No incidents yet. Browse your store in the Embedded Store Preview above — errors and slow requests will appear here automatically.</td>
                 </tr>
               </tbody>
             </table>
